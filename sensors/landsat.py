@@ -72,8 +72,8 @@ class Landsat_ARD(object):
         tile_numbers = self.parts.pop(3)
         d = {'horizontal_tile_number': tile_numbers[:3],
              'vertical_tile_number': tile_numbers[3:],
-             'acquisition_date': datetime.strptime(self.parts.pop(3), '%Y%m%d'),
-             'production_date': datetime.strptime(self.parts.pop(3), '%Y%m%d'),
+             'acquisition_date': datetime.strptime(self.parts.pop(3), '%Y%m%d').strftime('%Y-%m-%d'),
+             'production_date': datetime.strptime(self.parts.pop(3), '%Y%m%d').strftime('%Y-%m-%d'),
              'collection_number': self.parts.pop(3),
              'ard_version': self.parts.pop(3),
              'band': self.parts.pop(-1)[1]
