@@ -1,6 +1,6 @@
 import re
 
-from cognition.sensors.landsat import Landsat_ARD, Landsat
+from sensors.landsat import Landsat_ARD, Landsat
 
 ls7_ard = re.compile(r"^L(\S{1})(07)_(\S{2})_(\d{6})_(\d{8})_(\d{8})_(\w{3})_(\w{3})_(\w+)(\w{2}\.\S{3})")
 ls8_ard = re.compile(r"^L(\S{1})(08)_(\S{2})_(\d{6})_(\d{8})_(\d{8})_(\w{3})_(\w{3})_(\w+)(\w{2}\.\S{3})")
