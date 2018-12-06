@@ -7,7 +7,7 @@ class Landsat(object):
     def __init__(self, parts):
         self.parts = list(parts)
         self.labels = ['sensor', 'satellite']
-        self.lut = [{'C': 'OLI/TIRS',
+        self.lut = [{'C': 'OLI_TIRS',
                      'O': 'OLI',
                      'E': 'ETM+',
                      'T': 'TM',
@@ -41,7 +41,7 @@ class Landsat_ARD(object):
         self.labels = ["sensor", "satellite", "regional_grid", "product"]
         self.lut = [{'T': 'TM',
                      'E': 'ETM',
-                     'C': 'OLI/TIRS',
+                     'C': 'OLI_TIRS',
                      'O': 'OLI',
                      },
                     {'04': 'Landsat4',
