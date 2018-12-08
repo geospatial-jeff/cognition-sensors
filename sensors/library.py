@@ -1,6 +1,7 @@
 import re
+import os
 
-from sensors.landsat import Landsat_ARD, Landsat
+from sensors.sensors import Landsat_ARD, Landsat
 
 ls7_ard = re.compile(r"^L(\S{1})(07)_(\S{2})_(\d{6})_(\d{8})_(\d{8})_(\w{3})_(\w{3})_(\w+)(\w{2}\.\S{3})")
 ls8_ard = re.compile(r"^L(\S{1})(08)_(\S{2})_(\d{6})_(\d{8})_(\d{8})_(\w{3})_(\w{3})_(\w+)(\w{2}\.\S{3})")
@@ -19,9 +20,10 @@ class AssetLibrary(object):
 
 class Asset(AssetLibrary):
 
-    def __init__(self, fname):
+    def __init__(self, vrt):
         AssetLibrary.__init__(self)
-        self.fname = fname
+        self.vrt = vrt
+        self.fname = os.path.split(vrt.filename)[-1]
         self.sensor = self.lookup()
 
     def lookup(self):
@@ -33,3 +35,7 @@ class Asset(AssetLibrary):
 
     def metadata(self):
         return self.sensor.metadata()
+
+    def handle_item(self, collection):
+        """Creates a STAC item and adds to collection (opened with sat-stac)"""
+        return self.sensor.stac_item(self.vrt, collection)
