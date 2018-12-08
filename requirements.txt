@@ -1,2 +1,3 @@
 git+https://github.com/geospatial-jeff/pygdal-json.git
 git+https://github.com/geospatial-jeff/xmljson.git
+sat-stac
