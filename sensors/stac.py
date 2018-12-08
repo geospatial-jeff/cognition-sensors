@@ -17,6 +17,3 @@ class Item(dict):
                 [vrt.extent[0], vrt.extent[3]]
                  ]]
         }
-
-    def add_to_collection(self, collection):
-        collection.add_item(dict(self))
