@@ -36,7 +36,7 @@ class Asset(AssetLibrary):
     def metadata(self):
         return self.sensor.metadata()
 
-    def stac_item(self, collection):
+    def stac_item(self):
         """Creates a STAC item and adds to collection (opened with sat-stac)"""
         return self.sensor.stac_item(self.vrt)
 
