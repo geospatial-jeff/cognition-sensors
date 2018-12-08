@@ -89,7 +89,7 @@ class Landsat_ARD(object):
         return d
 
 
-    def stac_item(self, vrt, catalog):
+    def stac_item(self, vrt):
         #Build STAC item with metadata
         metadata = self.metadata()
         stac_item = stac.Item(vrt)
@@ -99,7 +99,7 @@ class Landsat_ARD(object):
         #Create stat-stac item
         item_path = '${horizontal_tile_number}/${vertical_tile_number}/${acquisition_date}'
         satstac_item = satstac.Item(stac_item)
-        catalog.add_item(satstac_item, path=item_path)
         return satstac_item
 
-
+    def stac_path(self):
+        return '${horizontal_tile_number}/${vertical_tile_number}/${acquisition_date}'
