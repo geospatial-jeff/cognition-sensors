@@ -37,6 +37,18 @@ class Landsat(object):
             d.update({self.labels[idx]: self.lut[idx][parts_copy.pop(0)]})
         return d
 
+    def stac_item(self, vrt):
+        #Build STAC item with metadata
+        metadata = self.metadata()
+        stac_item = stac.Item(vrt)
+        stac_item['properties'] = metadata
+        stac_item['assets'] = {'raw': {'href': vrt.filename}}
+
+        #Create stat-stac item
+        item_path = '${wrs_path}/${wrs_row}/${acquisition_date}'
+        satstac_item = satstac.Item(stac_item)
+        return satstac_item
+
 class LandsatAWSEarth(Landsat):
 
     def __init__(self, parts):
