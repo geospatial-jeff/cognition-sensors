@@ -83,10 +83,10 @@ class Landsat_ARD(object):
                      'C': 'OLI_TIRS',
                      'O': 'OLI',
                      },
-                    {'04': 'Landsat4',
-                     '05': 'Landsat5',
-                     '07': 'Landsat7',
-                     '08': 'Landsat8'
+                    {'04': 'Landsat4ARD',
+                     '05': 'Landsat5ARD',
+                     '07': 'Landsat7ARD',
+                     '08': 'Landsat8ARD'
                      },
                     {'CU': 'CONUS',
                      'AK': 'Alaska',
