@@ -1,11 +1,12 @@
 import re
 import os
 
-from sensors.sensors import Landsat_ARD, Landsat
+from sensors.sensors import Landsat_ARD, Landsat, LandsatAWSEarth
 
 ls7_ard = re.compile(r"^L(\S{1})(07)_(\S{2})_(\d{6})_(\d{8})_(\d{8})_(\w{3})_(\w{3})_(\w+)(\w{2}\.\S{3})")
 ls8_ard = re.compile(r"^L(\S{1})(08)_(\S{2})_(\d{6})_(\d{8})_(\d{8})_(\w{3})_(\w{3})_(\w+)(\w{2}\.\S{3})")
-ls8 = re.compile(r"^L(\S{1})(08)_(\w{4})_(\d{6})_(\d{8})_(\d{8})_(\d{2})_(\w{2})")
+ls8 = re.compile(r"^L(\S{1})(08)_(\w{4})_(\d{6})_(\d{8})_(\d{8})_(\d{2})_(\w{2}).tif")
+ls8_awsearth = re.compile(r"^L(\S{1})(08)_(\w{4})_(\d{6})_(\d{8})_(\d{8})_(\d{2})_(\w{2})_(\w{2})")
 
 class InvalidPattern(BaseException):
     pass
@@ -15,7 +16,8 @@ class AssetLibrary(object):
     def __init__(self):
         self.regexes = {ls8: Landsat,
                         ls7_ard: Landsat_ARD,
-                        ls8_ard: Landsat_ARD
+                        ls8_ard: Landsat_ARD,
+                        ls8_awsearth: LandsatAWSEarth
                         }
 
 class Asset(AssetLibrary):

@@ -24,16 +24,38 @@ class Landsat(object):
                     ]
 
     def metadata(self):
-        tile_numbers = self.parts.pop(3)
+        parts_copy = deepcopy(self.parts)
+        tile_numbers = parts_copy.pop(3)
         d = {'wrs_path': tile_numbers[:3],
              'wrs_row': tile_numbers[3:],
-             'acquisition_date': datetime.strptime(self.parts.pop(3), '%Y%m%d'),
-             'production_date': datetime.strptime(self.parts.pop(3), '%Y%m%d'),
-             "collection_number": self.parts.pop(3),
-             "collection_category": self.parts.pop(3),
-             "processing_level": self.parts.pop(-1)}
+             'acquisition_date': datetime.strptime(parts_copy.pop(3), '%Y%m%d'),
+             'production_date': datetime.strptime(parts_copy.pop(3), '%Y%m%d'),
+             "collection_number": parts_copy.pop(3),
+             "collection_category": parts_copy.pop(3),
+             "processing_level": parts_copy.pop(-1)}
         for idx, item in enumerate(self.lut):
-            d.update({self.labels[idx]: self.lut[idx][self.parts.pop(0)]})
+            d.update({self.labels[idx]: self.lut[idx][parts_copy.pop(0)]})
+        return d
+
+class LandsatAWSEarth(Landsat):
+
+    def __init__(self, parts):
+        Landsat.__init__(self, parts)
+
+    def metadata(self):
+        parts_copy = deepcopy(self.parts)
+        tile_numbers = parts_copy.pop(3)
+        d = {'wrs_path': tile_numbers[:3],
+             'wrs_row': tile_numbers[3:],
+             'acquisition_date': datetime.strptime(parts_copy.pop(3), '%Y%m%d'),
+             'production_date': datetime.strptime(parts_copy.pop(3), '%Y%m%d'),
+             "collection_number": parts_copy.pop(3),
+             "collection_category": parts_copy.pop(3),
+             "band": parts_copy.pop(3)[1:],
+             "processing_level": parts_copy.pop(-1)
+             }
+        for idx, item in enumerate(self.lut):
+            d.update({self.labels[idx]: self.lut[idx][parts_copy.pop(0)]})
         return d
 
 
